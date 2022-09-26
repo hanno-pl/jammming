@@ -2,6 +2,7 @@ import './App.css';
 import { SearchBar } from '../SearchBar/SearchBar';
 import { SearchResults } from '../SearchResults/SearchResults'
 import { Playlist } from '../Playlist/Playlist';
+import { Spotify } from '../../util/Spotify';
 import React from "react"
 
 class App extends React.Component {
@@ -75,8 +76,9 @@ class App extends React.Component {
     const trackURIs = this.state.playlistTracks.map(track => track.uri);
   }
 
-  search(term) {
-    alert(term)
+  async search(term) {
+    const spotifyResults = await Spotify.search(term);
+    this.setState({searchResults: spotifyResults})
   }
 
   render() {
